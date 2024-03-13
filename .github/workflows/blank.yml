@@ -35,8 +35,20 @@ jobs:
       - uses: pnpm/action-setup@v3
         with:
           version: 8
-      - run: node -v
-      - run: pnpm -v
+      # Stocke le chemin du store de PNPM en variable d'environnement
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          # Chemin de ce qui est caché
+          path: ${{ env.STORE_PATH }}
+          # Clé du cache, si celle-ci change le cache est invalidé
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test
