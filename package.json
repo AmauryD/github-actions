@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "pnpm vitest",
+    "echo": "echo bonjour",
     "lint": "pnpm eslint ."
   },
   "keywords": [],

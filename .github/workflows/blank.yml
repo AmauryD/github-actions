@@ -22,5 +22,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: ls -la
+      # installe node dans la machine
+      - uses: actions/setup-node@v4
+        with:
+          # installe la version 20 de nodeJS
+          node-version: 20
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - run: node -v
+      - run: pnpm -v
