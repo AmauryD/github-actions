@@ -16,6 +16,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    timeout-minutes: 2
     strategy:
       matrix:
         # les différents OS sur lesquels faire tourner notre action
